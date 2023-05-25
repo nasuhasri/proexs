@@ -18,7 +18,7 @@ class ExsController extends Controller
         date_default_timezone_set('Asia/Kuala_Lumpur');
 
         $now    = date('Y-m-d H:i:s');
-        $timeIn = new DateTime('2023-05-25 20:00:00');
+        $timeIn = new DateTime('2023-05-25 18:00:00');
         $timeOut = new DateTime('2023-05-25 23:40:00');
 
         $duration = $timeIn->diff($timeOut);
@@ -45,11 +45,13 @@ class ExsController extends Controller
                 $minutes = $duration->i;
 
                 // first 3 hours + RM1.5 per hour even though it is not a full hour
+                // example: 2 hours 30 minutes = RM6 + RM1.5 =  RM7.5
                 if ($hours <= 3) {
                     $amount = ($hours * 3) + 1.5;
                 }
                 else {
                     // more than 3 hours
+                    // example: 4 hours 30 minutes = RM9 + RM1.5 + RM1.5 = RM12
                     $amount = 3 * 3;
 
                     if (!empty($minutes) && ($minutes > 0 && $minutes < 60)) {
